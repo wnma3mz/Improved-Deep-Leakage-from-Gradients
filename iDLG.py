@@ -199,7 +199,7 @@ def main():
                     optimizer.zero_grad()
                     pred = net(dummy_data)
                     if method == 'DLG':
-                        dummy_loss = - torch.mean(torch.sum(torch.softmax(dummy_label, -1) * torch.log(torch.softmax(pred, -1)), dim=-1))
+                        dummy_loss = torch.mean(torch.sum(-torch.softmax(dummy_label, -1) * torch.log(torch.softmax(pred, -1)), dim=1))
                         # dummy_loss = criterion(pred, gt_label)
                     elif method == 'iDLG':
                         dummy_loss = criterion(pred, label_pred)
